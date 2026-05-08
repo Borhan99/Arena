@@ -1,0 +1,9 @@
+import '../entities/user_entity.dart';
+
+abstract class AuthRepository {
+  Future<bool> login(String email, String password);
+  Future<bool> register(String name, String email, String password);
+  Future<void> logout();
+  Future<bool> checkAuthStatus();
+  Future<UserEntity?> getCurrentUser();
+}
