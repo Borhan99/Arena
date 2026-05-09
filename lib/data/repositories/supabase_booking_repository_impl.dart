@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../domain/entities/booking_entity.dart';
 import '../../domain/repositories/booking_repository.dart';
@@ -18,13 +19,13 @@ class SupabaseBookingRepositoryImpl implements BookingRepository {
           .eq('user_id', user.id)
           .order('date', ascending: false);
 
-      print('DEBUG: Supabase Bookings Response: $response');
+      debugPrint('DEBUG: Supabase Bookings Response: $response');
 
       return (response as List)
           .map((json) => BookingModel.fromJson(json).toEntity())
           .toList();
     } catch (e) {
-      print('DEBUG: Supabase Bookings Error: $e');
+      debugPrint('DEBUG: Supabase Bookings Error: $e');
       throw Exception('Failed to fetch user bookings: $e');
     }
   }
@@ -57,10 +58,7 @@ class SupabaseBookingRepositoryImpl implements BookingRepository {
   @override
   Future<void> cancelBooking(String bookingId) async {
     try {
-      await _client
-          .from('bookings')
-          .update({'status': 'cancelled'})
-          .eq('id', bookingId);
+      await _client.from('bookings').delete().eq('id', bookingId);
     } catch (e) {
       throw Exception('Failed to cancel booking: $e');
     }

@@ -15,6 +15,7 @@ import 'package:the_project/features/favorites/presentation/bloc/favorites_bloc.
 import 'package:the_project/features/favorites/presentation/bloc/favorites_event.dart';
 import 'package:the_project/features/booking/presentation/bloc/bookings_list_bloc.dart';
 import 'package:the_project/features/booking/presentation/bloc/bookings_list_event.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -37,8 +38,65 @@ class MainView extends StatelessWidget {
   }
 }
 
-class MainViewContent extends StatelessWidget {
+class MainViewContent extends StatefulWidget {
   const MainViewContent({super.key});
+
+  @override
+  State<MainViewContent> createState() => _MainViewContentState();
+}
+
+class _MainViewContentState extends State<MainViewContent> {
+  RealtimeChannel? _bookingChannel;
+
+  @override
+  void initState() {
+    super.initState();
+    _setupRealtimeSubscription();
+  }
+
+  void _setupRealtimeSubscription() {
+    final uid = Supabase.instance.client.auth.currentUser?.id;
+    if (uid != null) {
+      _bookingChannel = Supabase.instance.client.channel('user:$uid');
+
+      _bookingChannel
+          ?.onBroadcast(
+            event: 'row_created',
+            callback: (payload) {
+              if (mounted) {
+                final booking = payload['booking'];
+                final venueName = booking?['venue_name'] ?? 'a venue';
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('New booking confirmed!'),
+                    backgroundColor: Colors.green,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+
+                // NotificationService().showNotification(
+                //   id: DateTime.now().millisecondsSinceEpoch.remainder(100000),
+                //   title: 'Booking Confirmed!',
+                //   body: 'You have successfully booked $venueName.',
+                // );
+
+                // Refresh the bookings list
+                context.read<BookingsListBloc>().add(GetUserBookingsEvent());
+              }
+            },
+          )
+          .subscribe();
+    }
+  }
+
+  @override
+  void dispose() {
+    if (_bookingChannel != null) {
+      Supabase.instance.client.removeChannel(_bookingChannel!);
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

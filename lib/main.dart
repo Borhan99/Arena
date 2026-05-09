@@ -49,7 +49,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthBloc>(
           create: (_) => sl<AuthBloc>()..add(AppStarted()),
-
         ),
         BlocProvider<ThemeCubit>(create: (_) => sl<ThemeCubit>()),
       ],

@@ -41,15 +41,23 @@ class BookingConfirmContent extends StatelessWidget {
             context: context,
             barrierDismissible: false,
             builder: (context) => AlertDialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.check_circle_outline_rounded, size: 80, color: Colors.green),
+                  const Icon(
+                    Icons.check_circle_outline_rounded,
+                    size: 80,
+                    color: Colors.green,
+                  ),
                   const SizedBox(height: 24),
                   Text(
                     'Booking Confirmed!',
-                    style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   const Text(
@@ -72,9 +80,9 @@ class BookingConfirmContent extends StatelessWidget {
             ),
           );
         } else if (state is BookingSubmissionError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
       child: Scaffold(
@@ -98,7 +106,11 @@ class BookingConfirmContent extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: theme.colorScheme.surface,
                         borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: theme.colorScheme.onSurface.withValues(alpha: 0.1)),
+                        border: Border.all(
+                          color: theme.colorScheme.onSurface.withValues(
+                            alpha: 0.1,
+                          ),
+                        ),
                       ),
                       child: Column(
                         children: [
@@ -120,13 +132,18 @@ class BookingConfirmContent extends StatelessWidget {
                                   children: [
                                     Text(
                                       booking.venueName,
-                                      style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                                      style: theme.textTheme.titleMedium
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                                     Text(
                                       '${booking.date} • ${booking.time}',
-                                      style: theme.textTheme.bodySmall?.copyWith(
-                                        color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                                      ),
+                                      style: theme.textTheme.bodySmall
+                                          ?.copyWith(
+                                            color: theme.colorScheme.onSurface
+                                                .withValues(alpha: 0.6),
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -139,7 +156,10 @@ class BookingConfirmContent extends StatelessWidget {
                           ),
                           _PriceRow(label: 'Price', value: booking.totalPrice),
                           const SizedBox(height: 12),
-                          const _PriceRow(label: 'Service Fee', value: serviceFee),
+                          const _PriceRow(
+                            label: 'Service Fee',
+                            value: serviceFee,
+                          ),
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 20),
                             child: Divider(),
@@ -149,7 +169,9 @@ class BookingConfirmContent extends StatelessWidget {
                             children: [
                               Text(
                                 'Total Amount',
-                                style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                                style: theme.textTheme.titleLarge?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 '\$${totalAmount.toStringAsFixed(2)}',
@@ -166,12 +188,26 @@ class BookingConfirmContent extends StatelessWidget {
                     const SizedBox(height: 32),
                     Text(
                       'Booking Details',
-                      style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ).animate(delay: 200.ms).fadeIn(),
                     const SizedBox(height: 16),
-                    _DetailItem(icon: Icons.group_outlined, label: 'Players', value: '${booking.people} People'),
-                    _DetailItem(icon: Icons.timer_outlined, label: 'Duration', value: '1 Hour'),
-                    _DetailItem(icon: Icons.payments_outlined, label: 'Payment', value: 'At Venue'),
+                    _DetailItem(
+                      icon: Icons.group_outlined,
+                      label: 'Players',
+                      value: '${booking.people} People',
+                    ),
+                    _DetailItem(
+                      icon: Icons.timer_outlined,
+                      label: 'Duration',
+                      value: '1 Hour',
+                    ),
+                    _DetailItem(
+                      icon: Icons.payments_outlined,
+                      label: 'Payment',
+                      value: 'At Venue',
+                    ),
                   ],
                 ),
               ),
@@ -179,17 +215,20 @@ class BookingConfirmContent extends StatelessWidget {
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(24),
-                child: BlocBuilder<BookingSubmissionBloc, BookingSubmissionState>(
-                  builder: (context, state) {
-                    return ArenaButton(
-                      text: 'CONFIRM BOOKING',
-                      isLoading: state is BookingSubmissionLoading,
-                      onPressed: () {
-                        context.read<BookingSubmissionBloc>().add(SubmitBookingEvent(booking));
+                child:
+                    BlocBuilder<BookingSubmissionBloc, BookingSubmissionState>(
+                      builder: (context, state) {
+                        return ArenaButton(
+                          text: 'CONFIRM BOOKING',
+                          isLoading: state is BookingSubmissionLoading,
+                          onPressed: () {
+                            context.read<BookingSubmissionBloc>().add(
+                              SubmitBookingEvent(booking),
+                            );
+                          },
+                        );
                       },
-                    );
-                  },
-                ),
+                    ),
               ),
             ),
           ],
@@ -219,7 +258,9 @@ class _PriceRow extends StatelessWidget {
         ),
         Text(
           '\$${value.toStringAsFixed(2)}',
-          style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+          style: theme.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );
@@ -231,7 +272,11 @@ class _DetailItem extends StatelessWidget {
   final String label;
   final String value;
 
-  const _DetailItem({required this.icon, required this.label, required this.value});
+  const _DetailItem({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -260,7 +305,9 @@ class _DetailItem extends StatelessWidget {
               ),
               Text(
                 value,
-                style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),

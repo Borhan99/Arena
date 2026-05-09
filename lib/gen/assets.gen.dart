@@ -43,21 +43,11 @@ class Assets {
   const Assets._();
 
   static const String aEnv = '.env';
-  static const String projectDescription = 'assets/Project_description.txt';
-  static const String reactTypeScriptTailwindToFlutter =
-      'assets/React_TypeScript_Tailwind_to_Flutter.txt';
-  static const String technicalDocumentation =
-      'assets/Technical_Documentation.txt';
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 
   /// List of all assets
-  static List<String> get values => [
-    aEnv,
-    projectDescription,
-    reactTypeScriptTailwindToFlutter,
-    technicalDocumentation,
-  ];
+  static List<String> get values => [aEnv];
 }
 
 class AssetGenImage {

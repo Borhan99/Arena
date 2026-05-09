@@ -58,4 +58,5 @@ abstract class LocaleKeys {
   static const dont_have_account = 'dont_have_account';
   static const already_have_account = 'already_have_account';
   static const logout = 'logout';
+  static const cancel = 'cancel';
 }

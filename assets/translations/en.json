@@ -47,5 +47,6 @@
   "sign_up": "Sign Up",
   "dont_have_account": "Don't have an account? Sign Up",
   "already_have_account": "Already have an account? Sign In",
-  "logout": "Logout"
+  "logout": "Logout",
+  "cancel": "Cancel"
 }

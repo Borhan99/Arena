@@ -1,16 +1,77 @@
-# the_project
+# The Project
 
-A new Flutter project.
+A Flutter application built with clean architecture, BLoC state management, and Supabase backend.
+
+## Tech Stack
+
+- **Flutter** - UI framework
+- **flutter_bloc** - State management
+- **freezed** - Immutable data classes
+- **dio** - HTTP client
+- **hive** - Local storage
+- **supabase** - Backend-as-a-service
+- **get_it** - Dependency injection
+- **easy_localization** - Internationalization
+- **retrofit** - API generation
+- **flutter_animate** - Animations
+
+## Project Structure
+
+```
+lib/
+├── core/              # Shared utilities, themes, configs
+│   ├── blocs/         # Global BLoCs (theme, etc.)
+│   ├── components/    # Reusable widgets
+│   ├── config/       # App configuration
+│   ├── di/           # Dependency injection
+│   ├── network/      # Network utilities
+│   └── theme/        # App theming
+├── data/              # Data layer
+│   ├── models/       # Data models
+│   └── repositories/ # Repository implementations
+├── domain/            # Domain layer
+│   ├── entities/     # Business entities
+│   ├── repositories/ # Repository interfaces
+│   └── usecases/     # Business logic
+├── features/          # Feature modules
+│   ├── auth/         # Authentication
+│   ├── booking/      # Booking feature
+│   ├── favorites/    # Favorites feature
+│   ├── home/         # Home screen
+│   ├── main/         # Main navigation
+│   ├── onboarding/   # Onboarding flow
+│   ├── profile/      # User profile
+│   └── splash/       # Splash screen
+└── gen/               # Generated code
+```
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
 
-A few resources to get you started if this is your first Flutter project:
+2. Generate code (freezed, json_serializable, retrofit):
+   ```bash
+   flutter pub run build_runner build --delete-conflicting-outputs
+   ```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3. Run the app:
+   ```bash
+   flutter run
+   ```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+
+- User authentication
+- Booking management
+- Favorites system
+- Multi-language support
+- Dark/Light theme
+- Local data persistence
+
+## Requirements
+
+- Flutter SDK 3.10+
+- Dart SDK 3.10+

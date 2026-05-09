@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../domain/entities/venue_entity.dart';
 import '../../domain/repositories/favorites_repository.dart';
@@ -34,7 +35,7 @@ class SupabaseFavoritesRepositoryImpl implements FavoritesRepository {
           .map((json) => VenueModel.fromJson(json).toEntity())
           .toList();
     } catch (e) {
-      print('DEBUG: Supabase getFavorites error: $e');
+      debugPrint('DEBUG: Supabase getFavorites error: $e');
       return [];
     }
   }
@@ -59,7 +60,7 @@ class SupabaseFavoritesRepositoryImpl implements FavoritesRepository {
         });
       }
     } catch (e) {
-      print('DEBUG: Supabase toggleFavorite error: $e');
+      debugPrint('DEBUG: Supabase toggleFavorite error: $e');
     }
   }
 
@@ -75,7 +76,7 @@ class SupabaseFavoritesRepositoryImpl implements FavoritesRepository {
           .eq('user_id', user.id)
           .eq('venue_id', id)
           .maybeSingle();
-      
+
       return response != null;
     } catch (e) {
       return false;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:the_project/features/booking/presentation/bloc/bookings_list_event.dart';
 import '../../../../core/constants/locale_keys.dart';
 import '../../../../domain/entities/booking_entity.dart';
 import '../bloc/bookings_list_bloc.dart';
@@ -210,6 +211,27 @@ class _BookingList extends StatelessWidget {
                             ),
                           ],
                         ),
+                        if (!isPast) ...[
+                          const SizedBox(height: 12),
+                          const Divider(),
+                          const SizedBox(height: 4),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton.icon(
+                              onPressed: () =>
+                                  _showCancelDialog(context, booking.id),
+                              icon: const Icon(
+                                Icons.close,
+                                size: 16,
+                                color: Colors.red,
+                              ),
+                              label: Text(
+                                LocaleKeys.cancel.tr(),
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ),
@@ -220,6 +242,31 @@ class _BookingList extends StatelessWidget {
             .fadeIn(duration: 400.ms, delay: (index * 100).ms)
             .slideX(begin: 0.1, end: 0);
       },
+    );
+  }
+
+  void _showCancelDialog(BuildContext context, String bookingId) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(LocaleKeys.cancel.tr()),
+        content: const Text('Are you sure you want to cancel this booking?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('NO'),
+          ),
+          TextButton(
+            onPressed: () {
+              context.read<BookingsListBloc>().add(
+                CancelBookingEvent(bookingId),
+              );
+              Navigator.pop(dialogContext);
+            },
+            child: const Text('YES', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
     );
   }
 

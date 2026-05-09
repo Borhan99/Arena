@@ -4,7 +4,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../../core/constants/locale_keys.dart';
 import '../../../../core/components/arena_button.dart';
-import '../../../../core/di/injection_container.dart';
 import '../../../../domain/entities/venue_entity.dart';
 import '../../../booking/presentation/views/booking_slots_view.dart';
 import '../../../favorites/presentation/bloc/favorites_bloc.dart';
@@ -135,15 +134,19 @@ class VenueDetailsContent extends StatelessWidget {
                                     Icon(
                                       Icons.people_alt_rounded,
                                       size: 16,
-                                      color: theme.colorScheme.onPrimaryContainer,
+                                      color:
+                                          theme.colorScheme.onPrimaryContainer,
                                     ),
                                     const SizedBox(width: 4),
                                     Text(
                                       venue.capacity.toString(),
-                                      style: theme.textTheme.labelLarge?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: theme.colorScheme.onPrimaryContainer,
-                                      ),
+                                      style: theme.textTheme.labelLarge
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: theme
+                                                .colorScheme
+                                                .onPrimaryContainer,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -160,14 +163,21 @@ class VenueDetailsContent extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    Icon(Icons.star, size: 16, color: Colors.amber),
+                                    Icon(
+                                      Icons.star,
+                                      size: 16,
+                                      color: Colors.amber,
+                                    ),
                                     const SizedBox(width: 4),
                                     Text(
                                       venue.rating.toString(),
-                                      style: theme.textTheme.labelLarge?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: theme.colorScheme.onSecondaryContainer,
-                                      ),
+                                      style: theme.textTheme.labelLarge
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: theme
+                                                .colorScheme
+                                                .onSecondaryContainer,
+                                          ),
                                     ),
                                   ],
                                 ),

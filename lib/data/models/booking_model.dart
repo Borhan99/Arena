@@ -3,7 +3,6 @@ import '../../domain/entities/booking_entity.dart';
 
 part 'booking_model.g.dart';
 
-
 @JsonSerializable(fieldRename: FieldRename.snake)
 class BookingModel {
   const BookingModel({
@@ -49,5 +48,6 @@ class BookingModel {
       status: status,
     );
   }
-}
 
+  Map<String, dynamic> toJson() => _$BookingModelToJson(this);
+}
