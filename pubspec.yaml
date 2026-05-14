@@ -12,9 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.8a
-  freezed_annotation: ^3.1.0
-  json_annotation: ^4.9.0
+  cupertino_icons: ^1.0.8
   dio: ^5.9.2
   shared_preferences: ^2.5.5
   hive: ^2.2.3
@@ -42,6 +40,8 @@ dev_dependencies:
   flutter_gen_runner: ^5.14.0
   flutter_launcher_icons: ^0.13.1
   mocktail: ^1.0.5
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
 
 flutter_launcher_icons:
   android: true

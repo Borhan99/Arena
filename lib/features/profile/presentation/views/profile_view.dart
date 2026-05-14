@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/constants/locale_keys.dart';
 import '../../../auth/presentation/bloc/auth_bloc.dart';
 import '../../../auth/presentation/views/auth_view.dart';
@@ -77,14 +79,27 @@ class ProfileView extends StatelessWidget {
             const SizedBox(height: 48),
 
             // ── Menu ──────────────────────────────────────────────────────
-            const _ProfileMenuTile(
+            _ProfileMenuTile(
               icon: Icons.person_outline,
               label: 'Edit Profile',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SettingsView()),
+                );
+              },
             ),
-            const _ProfileMenuTile(
-              icon: Icons.notifications_none,
-              label: 'Notifications',
-            ),
+
+            // () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (_) => const SettingsView()),
+            //     );
+            //   },
+            // const _ProfileMenuTile(
+            //   icon: Icons.notifications_none,
+            //   label: 'Notifications',
+            // ),
             const _ProfileMenuTile(
               icon: Icons.payment_outlined,
               label: 'Payment Methods',
@@ -201,8 +216,14 @@ class _StatItem extends StatelessWidget {
 class _ProfileMenuTile extends StatelessWidget {
   final IconData icon;
   final String label;
+  final VoidCallback? onTap;
 
-  const _ProfileMenuTile({required this.icon, required this.label});
+  const _ProfileMenuTile({
+    Key? key,
+    required this.icon,
+    required this.label,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -220,7 +241,8 @@ class _ProfileMenuTile extends StatelessWidget {
         ),
         title: Text(label, style: theme.textTheme.bodyLarge),
         trailing: const Icon(Icons.chevron_right, size: 20),
-        onTap: () {},
+        onTap: onTap,
+
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     );

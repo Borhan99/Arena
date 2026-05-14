@@ -47,11 +47,11 @@ class SettingsView extends StatelessWidget {
               }
             },
           ),
-          _SwitchTile(
-            title: LocaleKeys.push_notifications.tr(),
-            value: true,
-            onChanged: (v) {},
-          ),
+          // _SwitchTile(
+          //   title: LocaleKeys.push_notifications.tr(),
+          //   value: true,
+          //   onChanged: (v) {},
+          // ),
           _SwitchTile(
             title: LocaleKeys.email_updates.tr(),
             value: true,
@@ -71,8 +71,7 @@ class SettingsView extends StatelessWidget {
             onTap: null,
           ),
           _MenuTile(
-            title:
-                '                      ${LocaleKeys.app_developer.tr()} \n                            Borhan',
+            title: '${LocaleKeys.app_developer.tr()} Borhan',
             onTap: () {
               launchUrl(
                 Uri.parse('https://t.me/Borhan_almalek'),
